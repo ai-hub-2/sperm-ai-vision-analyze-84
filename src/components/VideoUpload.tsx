@@ -1,15 +1,16 @@
 import React, { useState, useCallback } from 'react';
-import { Upload, Video, X, AlertCircle, CheckCircle, Loader2, Cpu, Zap, Brain, Microscope, Sparkles, Image, Camera, Sun, Moon } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Upload, Video, X, AlertCircle, CheckCircle, Loader2, Cpu, Zap, Brain, Microscope, Sparkles, Image, Camera } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useTheme } from 'next-themes';
 import CameraCapture from './CameraCapture';
+import UploadHeader from './upload/UploadHeader';
+import TechnologyShowcase from './upload/TechnologyShowcase';
 
 interface VideoUploadProps {
   onAnalysisComplete: (data: any) => void;
@@ -75,7 +76,6 @@ const VideoUpload: React.FC<VideoUploadProps> = ({ onAnalysisComplete }) => {
   };
 
   const handleFile = (file: File) => {
-    // Validate file type - support both video and images
     const isVideo = file.type.startsWith('video/');
     const isImage = file.type.startsWith('image/');
     
@@ -88,7 +88,6 @@ const VideoUpload: React.FC<VideoUploadProps> = ({ onAnalysisComplete }) => {
       return;
     }
 
-    // Validate file size (max 2GB for videos, 100MB for images)
     const maxSize = isVideo ? 2 * 1024 * 1024 * 1024 : 100 * 1024 * 1024;
     if (file.size > maxSize) {
       toast({
@@ -141,7 +140,6 @@ const VideoUpload: React.FC<VideoUploadProps> = ({ onAnalysisComplete }) => {
     setUploadProgress(0);
 
     try {
-      // Real upload to Supabase Storage with progress tracking
       const uploadInterval = setInterval(() => {
         setUploadProgress(prev => {
           if (prev >= 90) {
@@ -156,10 +154,8 @@ const VideoUpload: React.FC<VideoUploadProps> = ({ onAnalysisComplete }) => {
       setUploadProgress(100);
       clearInterval(uploadInterval);
 
-      // Start REAL AI analysis with Koyeb processing stages
       setAnalysisStatus('processing');
       
-      // Real processing stages with realistic timing for different stages
       let stageIndex = 0;
       const stageInterval = setInterval(() => {
         if (stageIndex < realProcessingStages.length) {
@@ -168,9 +164,8 @@ const VideoUpload: React.FC<VideoUploadProps> = ({ onAnalysisComplete }) => {
         } else {
           clearInterval(stageInterval);
         }
-      }, 4000); // 4 seconds per stage for comprehensive real processing
+      }, 4000);
 
-      // Call REAL edge function for AI analysis with Koyeb
       console.log('🚀 Starting REAL AI analysis with Koyeb...', mediaType);
       const { data: analysisData, error } = await supabase.functions.invoke('sperm-analysis', {
         body: {
@@ -227,92 +222,13 @@ const VideoUpload: React.FC<VideoUploadProps> = ({ onAnalysisComplete }) => {
     <>
       <div className={`w-full max-w-4xl mx-auto transition-colors duration-300 ${darkMode ? 'dark' : ''}`}>
         <Card className={`${containerClass} border-2`}>
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-3">
-                <div className="p-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg">
-                  <Microscope className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                    تحليل حقيقي متطور بالذكاء الاصطناعي
-                  </span>
-                  <div className="flex items-center gap-2 mt-1">
-                    <Sparkles className="w-4 h-4 text-yellow-500" />
-                    <span className="text-sm text-yellow-600 dark:text-yellow-400 font-medium">
-                      نظام حقيقي • Koyeb GPU • YOLOv8 + DeepSort
-                    </span>
-                  </div>
-                </div>
-              </CardTitle>
-              <div className="flex items-center gap-2">
-                <Sun className="w-4 h-4" />
-                <Switch 
-                  checked={darkMode} 
-                  onCheckedChange={setDarkMode}
-                  className="data-[state=checked]:bg-purple-600"
-                />
-                <Moon className="w-4 h-4" />
-              </div>
-            </div>
-            <CardDescription className={`${darkMode ? 'text-gray-300' : 'text-gray-600'} text-base`}>
-              🚀 نظام متطور حقيقي يستخدم Koyeb GPU Cloud، YOLOv8، DeepSort، OpenCV، والتعلم العميق للتحليل الطبي الدقيق
-            </CardDescription>
-          </CardHeader>
+          <UploadHeader darkMode={darkMode} setDarkMode={setDarkMode} />
           
           <CardContent className="space-y-6">
-            {/* Real AI Technology Showcase */}
-            <div className={`grid grid-cols-2 md:grid-cols-5 gap-4 p-6 rounded-xl ${darkMode ? 'bg-gradient-to-r from-gray-800 via-blue-900/20 to-purple-900/20' : 'bg-gradient-to-r from-blue-50 via-purple-50 to-blue-50'} border border-purple-200/30`}>
-              <div className="flex flex-col items-center gap-3">
-                <div className="p-3 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl">
-                  <Brain className="w-6 h-6 text-white" />
-                </div>
-                <div className="text-center">
-                  <span className="text-sm font-bold text-blue-600">YOLOv8</span>
-                  <p className="text-xs text-gray-500">كشف حقيقي</p>
-                </div>
-              </div>
-              <div className="flex flex-col items-center gap-3">
-                <div className="p-3 bg-gradient-to-r from-green-600 to-green-700 rounded-xl">
-                  <Zap className="w-6 h-6 text-white" />
-                </div>
-                <div className="text-center">
-                  <span className="text-sm font-bold text-green-600">DeepSort</span>
-                  <p className="text-xs text-gray-500">تتبع حقيقي</p>
-                </div>
-              </div>
-              <div className="flex flex-col items-center gap-3">
-                <div className="p-3 bg-gradient-to-r from-purple-600 to-purple-700 rounded-xl">
-                  <Cpu className="w-6 h-6 text-white" />
-                </div>
-                <div className="text-center">
-                  <span className="text-sm font-bold text-purple-600">OpenCV</span>
-                  <p className="text-xs text-gray-500">معالجة حقيقية</p>
-                </div>
-              </div>
-              <div className="flex flex-col items-center gap-3">
-                <div className="p-3 bg-gradient-to-r from-red-600 to-red-700 rounded-xl">
-                  <Microscope className="w-6 h-6 text-white" />
-                </div>
-                <div className="text-center">
-                  <span className="text-sm font-bold text-red-600">CASA</span>
-                  <p className="text-xs text-gray-500">WHO 2010</p>
-                </div>
-              </div>
-              <div className="flex flex-col items-center gap-3">
-                <div className="p-3 bg-gradient-to-r from-yellow-600 to-orange-600 rounded-xl">
-                  <Sparkles className="w-6 h-6 text-white" />
-                </div>
-                <div className="text-center">
-                  <span className="text-sm font-bold text-yellow-600">Koyeb</span>
-                  <p className="text-xs text-gray-500">GPU Cloud</p>
-                </div>
-              </div>
-            </div>
+            <TechnologyShowcase darkMode={darkMode} />
 
             {analysisStatus === 'idle' && !selectedFile && (
               <>
-                {/* Camera Capture Options */}
                 <div className="flex justify-center gap-4 mb-6">
                   <Button
                     onClick={() => setShowCamera(true)}
@@ -597,7 +513,6 @@ const VideoUpload: React.FC<VideoUploadProps> = ({ onAnalysisComplete }) => {
         </Card>
       </div>
 
-      {/* Camera Modal */}
       {showCamera && (
         <CameraCapture
           onMediaCaptured={handleCameraCapture}
