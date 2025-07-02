@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { Bell, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { User, Menu } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 
 interface MobileHeaderProps {
@@ -12,47 +12,39 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({ onAuthClick }) => {
   const { user } = useAuth();
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-gray-900 border-b border-gray-700 px-4 py-3 shadow-lg">
-      <div className="flex items-center justify-between gap-4">
-        {/* Logo */}
-        <div className="flex items-center gap-3 rtl:gap-3 min-w-0 flex-shrink-0">
-          <div className="flex items-center justify-center w-12 h-12 rounded-xl shadow-lg overflow-hidden bg-white p-1.5 flex-shrink-0">
+    <header className="bg-gradient-to-r from-blue-900 via-indigo-900 to-purple-900 text-white p-4 shadow-lg border-b border-blue-800 sticky top-0 z-50">
+      <div className="flex items-center justify-between max-w-md mx-auto">
+        {/* App Logo and Title */}
+        <div className="flex items-center gap-3">
+          <div className="bg-white p-2 rounded-xl shadow-lg">
             <img 
               src="/lovable-uploads/e4f41878-e368-4bc6-9ae8-93a9feef83c8.png" 
-              alt="سينا للتحاليل الطبية" 
-              className="w-full h-full object-contain"
+              alt="ابن سينا للتحاليل الطبية" 
+              className="w-8 h-8 object-contain"
             />
           </div>
-          <div className="min-w-0 flex-1">
-            <h1 className="text-lg font-bold text-white truncate">سينا للتحاليل</h1>
-            <p className="text-xs text-blue-400 truncate">التحاليل الطبية المتقدمة</p>
+          <div className="text-right">
+            <h1 className="text-lg font-bold text-white">ابن سينا</h1>
+            <p className="text-xs text-blue-200">للتحاليل الطبية</p>
           </div>
         </div>
 
-        {/* Actions */}
-        <div className="flex items-center gap-2 rtl:gap-2 flex-shrink-0">
-          {user ? (
-            <>
-              <Button variant="ghost" size="sm" className="p-2 text-gray-300 hover:text-white hover:bg-gray-800 flex-shrink-0">
-                <Bell className="w-4 h-4" />
-              </Button>
-              <Button variant="ghost" size="sm" className="p-2 text-gray-300 hover:text-white hover:bg-gray-800 flex-shrink-0">
-                <Settings className="w-4 h-4" />
-              </Button>
-              <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="text-white text-sm font-medium">{user.email?.[0]?.toUpperCase()}</span>
-              </div>
-            </>
-          ) : (
-            <Button 
-              onClick={onAuthClick}
-              size="sm"
-              className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-4 py-2 rounded-full shadow-lg flex-shrink-0 whitespace-nowrap"
-            >
-              دخول
-            </Button>
-          )}
-        </div>
+        {/* User Authentication Button */}
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={onAuthClick}
+          className="text-white hover:bg-white/10 p-2 rounded-lg"
+        >
+          <User className="w-5 h-5" />
+        </Button>
+      </div>
+      
+      {/* Developer Attribution */}
+      <div className="mt-2 text-center">
+        <p className="text-xs text-blue-300">
+          طُور بواسطة: <span className="font-semibold text-blue-100">يوسف شتيوي</span>
+        </p>
       </div>
     </header>
   );

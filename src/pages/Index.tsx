@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import AuthDialog from '@/components/AuthDialog';
@@ -39,16 +40,17 @@ const Index = () => {
             <div className="w-16 h-16 bg-white rounded-xl animate-bounce flex items-center justify-center p-2">
               <img 
                 src="/lovable-uploads/e4f41878-e368-4bc6-9ae8-93a9feef83c8.png" 
-                alt="سينا للتحاليل الطبية" 
+                alt="ابن سينا للتحاليل الطبية" 
                 className="w-full h-full object-contain"
               />
             </div>
           </div>
-          <h2 className="text-2xl font-bold text-white mb-2">سينا للتحاليل الطبية</h2>
+          <h2 className="text-2xl font-bold text-white mb-2">ابن سينا للتحاليل الطبية</h2>
           <p className="text-gray-400 mb-6">جاري تحميل التطبيق...</p>
           <div className="w-full max-w-64 h-2 bg-gray-800 rounded-full mx-auto overflow-hidden">
             <div className="w-full h-full bg-gradient-to-r from-blue-600 to-indigo-600 animate-pulse rounded-full"></div>
           </div>
+          <p className="text-xs text-gray-500 mt-4">طُور بواسطة: يوسف شتيوي</p>
         </div>
       </div>
     );
