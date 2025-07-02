@@ -27,9 +27,7 @@ const Index = () => {
   };
 
   const handleMediaCaptured = (file: File, type: 'photo' | 'video') => {
-    // Handle captured media - could trigger analysis
     console.log('Media captured:', { file, type });
-    // You could trigger analysis here or show preview
   };
 
   if (loading) {
@@ -39,7 +37,7 @@ const Index = () => {
           <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 rounded-2xl shadow-2xl inline-block mb-6 animate-pulse">
             <div className="w-16 h-16 bg-white rounded-xl animate-bounce flex items-center justify-center p-2">
               <img 
-                src="/lovable-uploads/e4f41878-e368-4bc6-9ae8-93a9feef83c8.png" 
+                src="/lovable-uploads/c728e929-9651-4b8f-95a1-8b63f3308e6b.png" 
                 alt="ابن سينا للتحاليل الطبية" 
                 className="w-full h-full object-contain"
               />
@@ -76,11 +74,11 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800 flex flex-col">
+    <div className="min-h-screen max-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800 flex flex-col overflow-hidden">
       <MobileHeader onAuthClick={() => setIsAuthOpen(true)} />
       
-      <main className="flex-1 overflow-y-auto pb-24">
-        <div className="min-h-full">
+      <main className="flex-1 overflow-y-auto pb-20">
+        <div className="h-full">
           {renderActiveTab()}
         </div>
       </main>

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { User, Menu } from 'lucide-react';
+import { User } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 
 interface MobileHeaderProps {
@@ -18,7 +18,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({ onAuthClick }) => {
         <div className="flex items-center gap-3">
           <div className="bg-white p-2 rounded-xl shadow-lg">
             <img 
-              src="/lovable-uploads/e4f41878-e368-4bc6-9ae8-93a9feef83c8.png" 
+              src="/lovable-uploads/c728e929-9651-4b8f-95a1-8b63f3308e6b.png" 
               alt="ابن سينا للتحاليل الطبية" 
               className="w-8 h-8 object-contain"
             />

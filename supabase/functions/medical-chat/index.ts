@@ -47,7 +47,7 @@ serve(async (req) => {
     أنت طبيب متخصص في طب الذكورة والإنجاب. قدم إجابة طبية دقيقة ومهنية باللغة العربية.
     `
 
-    // Make request to AI service (using Ollama or another AI service)
+    // Make request to AI service
     const aiResponse = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
