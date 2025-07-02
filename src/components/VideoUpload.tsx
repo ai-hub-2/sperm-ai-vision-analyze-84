@@ -1,12 +1,14 @@
 import React, { useState, useCallback } from 'react';
-import { Upload, Video, X, AlertCircle, CheckCircle, Loader2, Cpu, Zap, Brain, Microscope, Sparkles, Image, Camera } from 'lucide-react';
+import { Upload, Video, X, AlertCircle, CheckCircle, Loader2, Cpu, Zap, Brain, Microscope, Sparkles, Image, Camera, Sun, Moon } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
+import { useTheme } from 'next-themes';
 import CameraCapture from './CameraCapture';
 
 interface VideoUploadProps {
@@ -24,6 +26,12 @@ const VideoUpload: React.FC<VideoUploadProps> = ({ onAnalysisComplete }) => {
   const [mediaType, setMediaType] = useState<'photo' | 'video' | null>(null);
   const { toast } = useToast();
   const { user } = useAuth();
+  const { theme, setTheme } = useTheme();
+
+  const darkMode = theme === 'dark';
+  const setDarkMode = (isDark: boolean) => {
+    setTheme(isDark ? 'dark' : 'light');
+  };
 
   const realProcessingStages = [
     '🚀 نشر التحليل الحقيقي على Koyeb GPU Cloud',
@@ -217,7 +225,7 @@ const VideoUpload: React.FC<VideoUploadProps> = ({ onAnalysisComplete }) => {
 
   return (
     <>
-      <div className="w-full max-w-4xl mx-auto transition-colors duration-300 ${darkMode ? 'dark' : ''}">
+      <div className={`w-full max-w-4xl mx-auto transition-colors duration-300 ${darkMode ? 'dark' : ''}`}>
         <Card className={`${containerClass} border-2`}>
           <CardHeader>
             <div className="flex items-center justify-between">
