@@ -21,27 +21,20 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    // Optimize build for memory usage
-    chunkSizeWarningLimit: 1000,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          ui: ['@radix-ui/react-toast', '@radix-ui/react-switch', '@radix-ui/react-progress'],
-          supabase: ['@supabase/supabase-js'],
-          query: ['@tanstack/react-query'],
-          icons: ['lucide-react']
-        }
-      }
-    },
-    // Reduce memory usage during build
+    // Optimize for memory usage
+    chunkSizeWarningLimit: 500,
     minify: 'esbuild',
     sourcemap: false,
-    // Optimize for smaller bundle size
-    target: 'es2015'
+    target: 'es2015',
+    // Reduce memory usage
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      }
+    }
   },
   esbuild: {
-    // Optimize esbuild for memory usage
+    // Reduce memory usage
     logOverride: { 'this-is-undefined-in-esm': 'silent' }
   }
 }));
