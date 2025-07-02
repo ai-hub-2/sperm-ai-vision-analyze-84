@@ -1,10 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import { Upload, Video, X, AlertCircle, CheckCircle, Loader2, Moon, Sun, Cpu, Zap, Brain, Microscope, Sparkles, Image, Camera } from 'lucide-react';
+import { Upload, Video, X, AlertCircle, CheckCircle, Loader2, Cpu, Zap, Brain, Microscope, Sparkles, Image, Camera } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
@@ -19,7 +18,6 @@ const VideoUpload: React.FC<VideoUploadProps> = ({ onAnalysisComplete }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [analysisStatus, setAnalysisStatus] = useState<'idle' | 'uploading' | 'processing' | 'completed' | 'error'>('idle');
-  const [darkMode, setDarkMode] = useState(true);
   const [processingStage, setProcessingStage] = useState('');
   const [koyebJobId, setKoyebJobId] = useState<string | null>(null);
   const [showCamera, setShowCamera] = useState(false);
@@ -219,7 +217,7 @@ const VideoUpload: React.FC<VideoUploadProps> = ({ onAnalysisComplete }) => {
 
   return (
     <>
-      <div className={`w-full max-w-4xl mx-auto transition-colors duration-300 ${darkMode ? 'dark' : ''}`}>
+      <div className="w-full max-w-4xl mx-auto transition-colors duration-300 ${darkMode ? 'dark' : ''}">
         <Card className={`${containerClass} border-2`}>
           <CardHeader>
             <div className="flex items-center justify-between">
